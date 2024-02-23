@@ -9,10 +9,10 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 
 
-
 // Routing modules
 const indexRouter = require('../Routes/index');
 const mediaRouter = require('../Routes/media');
+const providersRouter = require('../Routes/providers');
 
 const app = express();
 
@@ -41,6 +41,7 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 // routing configuration
 app.use('/media', mediaRouter);
 app.use('/', indexRouter);
+app.use('/providers', providersRouter);
 
 //hbs custom helper
 const hbs = require('hbs');

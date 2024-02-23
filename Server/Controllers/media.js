@@ -14,14 +14,17 @@ let index = async (req, res, next) => {
 
 let displayCreateForm = (req, res, next) => {
     res.render('media/create', { title: 'Add New Media' });
+    res.render('providers/create', { title: 'Add New Provider' });
 };
 
 let createMedia = async (req, res, next) => {
     // save new media to DB
     await Media.create(req.body);
+    await Providers.create(req.body);
 
     // redirect
     res.redirect('/media');
+    res.redirect('/providers');
 };
 
 let deleteMedia = async (req, res, next) => {
@@ -35,16 +38,26 @@ let deleteMedia = async (req, res, next) => {
 
 let displayEditForm = async (req, res, next) => {
     let media = await Media.findById(req.params._id);
+    let provider = await Providers.findById(req.params._id);
 
     res.render('media/edit', { 
+
         title: 'Update Media',
         media: media
+    });
+    res.render('providers/edit', { 
+
+        title: 'Update Provider',
+        provider: provider
     });
 };
 
 let updateMedia = async (req, res, next) => {
     await Media.findByIdAndUpdate(req.params._id, req.body);
     res.redirect('/media');
+
+    await Providers.findByIdAndUpdate(req.params._id, req.body);
+    res.redirect('/providers');
 };
 
 // make public

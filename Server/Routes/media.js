@@ -33,5 +33,4 @@ router.post('/edit/:_id', (req, res, next) => {
     mediaController.updateMedia(req, res, next);
 });
 
-
 module.exports = router;
